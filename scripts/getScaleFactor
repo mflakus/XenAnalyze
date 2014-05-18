@@ -60,10 +60,14 @@ SCALEFACTOR=25
     # psql -d $DBNAME -c "checkpoint;" >/dev/null 2>&1
     # setup
     echo "Starting Test with $CLIENTS clients" | tee $LOGFILE
-    vmstat 5 >> $LOGFILE &
+    # vmstat 5 >> $LOGFILE &
     pgbench -T 30 -c $CLIENTS -S $DBNAME | grep tps | grep excluding >> $LOGFILE
     psql -d $DBNAME -c "SELECT relname, reltuples, relpages from PG_class WHERE relname='pgbench_accounts';" >> $LOGFILE
+    TPS=`grep tps $LOGFILE | grep tps | awk '{print $3}'`
+    $XENSTORE_WRITE /local/domain/${domid}/${tpsDir} $TPS
+    echo "Completed with ${TPS} Transactions per Second"
+
     # let SCALEFACTOR=$SCALEFACTOR+$INC
-    killall vmstat
+    # killall vmstat
 # done
 

@@ -4,8 +4,8 @@ baseIP="192.168.122."
 passWD="XenGuest"
 targetPath="/usr/local/xen/scripts"
 
-# for IP in 87 143 204; 
-for IP in 118; 
+#for IP in 11 22 33 44; 
+for IP in 87; 
 do
 	fullIP=${baseIP}${IP}
 	echo "Updating IP ${fullIP}"

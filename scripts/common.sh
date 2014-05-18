@@ -19,9 +19,10 @@ domid=$(${XENSTORE_READ} domid)
 ## Keys for guests xenstore to do things ##
 dataCollect="data/analysis/collect"   # Start/stop collecting statistics
 benchmark="data/analysis/benchmark"   # Generate a load
+tpsDir="data/analysis/tps"            # Guest Transactions / Second
 
 ## Default - Run this benchmark on the Guest machines ##
 benchCmd="./getScaleFactor"
 
 ## Guest Machines DomIDs to run ##
-domIDs=(20)
+domIDs=(1 2 3 4)

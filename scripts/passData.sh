@@ -103,6 +103,8 @@ function doDomGuest {
 		elif [[ $analysis == "off" ]]; then
 			echo "Analysis is Off"
 			killall -q -1 collectGuest.pl
+			collectData="off"
+			startBench="off"
 		fi
 
 		doBench=$($XENSTORE_READ ${benchmark} 2>/dev/null)

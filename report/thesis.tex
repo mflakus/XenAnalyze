@@ -6,7 +6,7 @@
 \usepackage{colortbl}
 \usepackage{todonotes}
 \usepackage{url,hyperref}
-\hypersetup{colorlinks=true, linkcolor=blue}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=black}
 \usepackage{fancyvrb}
 \usepackage{verbatim}
 \usepackage[top=1in, bottom=1in, left=1.5in, right=1in]{geometry}
@@ -18,12 +18,16 @@
 % Install package: texlive-generic-extra
 \usepackage[font=small,labelfont=bf, singlelinecheck=false, skip=0pt]{caption}
 \usepackage{subcaption}
-
+\usepackage{setspace}
 
 %Remove hyphens
 \usepackage[none]{hyphenat}
 
 \begin{document}
+% Turn of page numbering for now
+\pagenumbering{gobble}
+
+\begin{comment}
 \title{System-wide Performance Analysis for Virtualization}
 \author{Deron Jensen\\
 \\
@@ -33,15 +37,19 @@ Portland, OR \\
 deron@cs.pdx.edu \\
 }
 \date{\today}
-% \onecolumn[
-% \begin{@twocolumnfalse}
   \maketitle
+\end{comment}
+
+% Make my own title page liKe: http://www.pdx.edu/sites/www.pdx.edu.ogs/files/ETD.thesis.titlepg.example.pdf
+\input{title}
 \newpage
 
 \begin{abstract}
-With the current trend in cloud computing and virtualization, more organizations are moving their systems from a physical host to a virtual server.  Although this can significanlty reduce hardware, power, and administration costs, it can increase cost in analyzing performance problems.  With virtualization, there is an initial performance overhead, and as more virtual machines are added to a physical host the interference increases between various guest machines.  When this interference occurs, a virtualized guest application may not perform as expected.  Additionally, there is little or no information to the virtual OS about the interference.  From the hypervisor viewpoint, tools are available to view each virtual machine, but the interference is not available. \newline
-\indent  We examine the interference that has been shown in previous research, and relate that to existing tools and research in root cause analysis.  We show that in virtualization there are addtional layers which need to be analyzed, and design a framework to determine if degradation is occuring from an external virtualization layer.  Additionally, we build a virtualization test suite with Xen and PostgreSQL and run multiple tests to create I/O interference.  We show how our framework can help determine if the problem is from external interference when an application is degraded.   
-  \end{abstract}
+\doublespacing
+\input{abstract}
+\singlespacing
+\end{abstract}
+
 \newpage
 % \end{@twocolumnfalse}
 
@@ -56,8 +64,14 @@ With the current trend in cloud computing and virtualization, more organizations
 \listoffigures 
 \newpage
 
+%definitions
+\input{definitions.tex}
+\newpage
+
 \onecolumn
 
+% TODO Set up Double Space
+\doublespacing
 \setcounter{page}{1}
 \pagenumbering{arabic}
 % 1.  This is a comment
@@ -65,31 +79,33 @@ With the current trend in cloud computing and virtualization, more organizations
 \input{introduction}
 \newpage
 
-\section{Motivating Example}
-\input{motivating}
-\newpage
+% This is in Intro now 
+%  \section{Motivating Example}
+% \input{motivating}
+% \newpage
 
-\section{Current Tools}
-\input{virtualization}
-\newpage
+% \section{Current Tools}
+% \newpage
 
 \section{Related Work}
 \input{related}
+\input{virtualization}
 \newpage
 
-\section{Design}
+\section{Methodology}
 \input{implementation}
-\newpage
-
-\section{Test Suite for IO virtualization}
+\subsection{Virtualization Test Suite}
 \input{testSuite.tex}
 \newpage
+
+% \section{Test Suite for IO virtualization}
+% \newpage
 
 \section{Experimental Results}
 \input{experiment.tex}
 \newpage
 
-\section{Discussions and Future Work}
+\section{Discussion and Conclusions}
 \input{discussion.tex}
 \newpage
 
